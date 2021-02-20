@@ -5,11 +5,11 @@ import { copyToClipboard } from 'utils';
 import styles from './Home.scss';
 
 const Home = (): JSX.Element => {
-    copyToClipboard();
+  copyToClipboard();
 
-    return (
-        <div className={styles.bg}>Home</div>
-    );
+  return (
+    <div className={styles.bg}>Home</div>
+  );
 };
 
 export default Home;

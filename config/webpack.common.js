@@ -7,29 +7,29 @@ const path = require('path');
  */
 
 const processTypescript = {
-    test: /\.tsx?$/,
-    use: ['ts-loader', 'babel-loader'],
-    exclude: /node_modules/
+  test: /\.tsx?$/,
+  use: ['ts-loader', 'babel-loader'],
+  exclude: /node_modules/,
 };
 
 const processScss = {
-    test: /\.scss$/i,
-    include: path.resolve(__dirname, '../src'),
-    use: [
-        MiniCssExtractPlugin.loader,
-        {
-            loader: 'css-loader',
-            options: {
-                modules: {
-                    exportLocalsConvention: 'camelCase',
-                    localIdentName: '[local]_[hash:base64:6]',
-                },
-            },
+  test: /\.scss$/i,
+  include: path.resolve(__dirname, '../src'),
+  use: [
+    MiniCssExtractPlugin.loader,
+    {
+      loader: 'css-loader',
+      options: {
+        modules: {
+          exportLocalsConvention: 'camelCase',
+          localIdentName: '[local]_[hash:base64:6]',
         },
-        {
-            loader: 'sass-loader',
-        },
-    ],
+      },
+    },
+    {
+      loader: 'sass-loader',
+    },
+  ],
 };
 
 /**
@@ -37,12 +37,12 @@ const processScss = {
  */
 
 const buildIndexHtml = new HtmlWebpackPlugin({
-    template: path.resolve(__dirname, '../src/index.html'),
+  template: path.resolve(__dirname, '../src/index.html'),
 });
 
 const miniCssExtract = new MiniCssExtractPlugin({
-    filename: '[name].[hash:8].css',
-    ignoreOrder: true,
+  filename: '[name].[hash:8].css',
+  ignoreOrder: true,
 });
 
 /**
@@ -50,23 +50,23 @@ const miniCssExtract = new MiniCssExtractPlugin({
  */
 
 module.exports = {
-    entry: path.resolve(__dirname, '../src/render.tsx'),
-    output: {
-        path: path.resolve(__dirname, '../public'),
-        filename: '[name].[chunkhash:8].js',
-        chunkFilename: '[name].[chunkhash:8].chunk.js',
-    },
-    module: {
-        rules: [
-            processTypescript,
-            processScss,
-        ]
-    },
-    plugins: [
-        buildIndexHtml,
-        miniCssExtract,
+  entry: path.resolve(__dirname, '../src/render.tsx'),
+  output: {
+    path: path.resolve(__dirname, '../public'),
+    filename: '[name].[chunkhash:8].js',
+    chunkFilename: '[name].[chunkhash:8].chunk.js',
+  },
+  module: {
+    rules: [
+      processTypescript,
+      processScss,
     ],
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js']
-    }
-}
+  },
+  plugins: [
+    buildIndexHtml,
+    miniCssExtract,
+  ],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
+  },
+};

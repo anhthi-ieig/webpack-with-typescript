@@ -1,3 +1,3 @@
 export default () => {
-    console.log('copy to clipboard');
+  console.log('copy to clipboard');
 };
