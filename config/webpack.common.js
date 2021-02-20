@@ -1,57 +1,19 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 /**
- * Rules
+ * Module Rules
  */
 
-const processTypescript = {
-  test: /\.tsx?$/,
-  use: ['ts-loader', 'babel-loader'],
-  exclude: /node_modules/,
-};
-
-const processScss = {
-  test: /\.scss$/i,
-  include: path.resolve(__dirname, '../src'),
-  use: [
-    MiniCssExtractPlugin.loader,
-    {
-      loader: 'css-loader',
-      options: {
-        modules: {
-          exportLocalsConvention: 'camelCase',
-          localIdentName: '[local]_[hash:base64:6]',
-        },
-      },
-    },
-    {
-      loader: 'sass-loader',
-    },
-    {
-      loader: 'style-resources-loader',
-      options: {
-        patterns: [
-          path.resolve(__dirname, '../src/styles/variables.scss'),
-        ],
-      },
-    },
-  ],
-};
+const processTypescript = require('./rules/typescript');
+const processScss = require('./rules/scss');
 
 /**
  * Plugins
  */
 
-const buildIndexHtml = new HtmlWebpackPlugin({
-  template: path.resolve(__dirname, '../src/index.html'),
-});
-
-const miniCssExtract = new MiniCssExtractPlugin({
-  filename: '[name].[hash:8].css',
-  ignoreOrder: true,
-});
+const stylelint = require('./plugins/stylelint-webpack-plugin');
+const extractCss = require('./plugins/mini-css-extract-plugin');
+const buildHtml = require('./plugins/html-webpack-plugin');
 
 /**
  * Config
@@ -71,8 +33,9 @@ module.exports = {
     ],
   },
   plugins: [
-    buildIndexHtml,
-    miniCssExtract,
+    stylelint,
+    extractCss,
+    buildHtml,
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
