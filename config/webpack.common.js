@@ -40,4 +40,15 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        react: {
+          name: 'react',
+          test: /[\\/]node_modules[\\/]((react|react-dom).*)[\\/]/,
+          chunks: 'all',
+        },
+      },
+    },
+  },
 };

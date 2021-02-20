@@ -1,3 +1,9 @@
+import { get } from 'lodash';
+
 export default () => {
-  console.log('copy to clipboard');
+  const personal = {
+    name: 'Hello',
+  };
+
+  console.log(`Copied to clipboard: ${get(personal, 'name')}`);
 };

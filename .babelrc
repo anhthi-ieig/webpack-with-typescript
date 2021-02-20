@@ -1,22 +1,31 @@
 {
-    "presets": [
-        "@babel/preset-env",
-        "@babel/preset-react",
-        "@babel/preset-typescript"
-    ],
-    "plugins": [
-        [
-            "module-resolver",
-            {
-                "root": [
-                    "./src"
-                ],
-                "extensions": [
-                    ".ts",
-                    ".tsx",
-                    ".js"
-                ]
-            }
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src"
+        ],
+        "extensions": [
+          ".ts",
+          ".tsx",
+          ".js"
         ]
+      }
+    ],
+    [
+      "transform-imports",
+      {
+        "lodash": {
+          "transform": "lodash/${member}",
+          "preventFullImport": true
+        }
+      }
     ]
+  ]
 }

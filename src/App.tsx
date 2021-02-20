@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import './styles/base.scss';
 
-import Home from './pages/Home';
+const Home = lazy(() => import('./pages/Home'));
 
 const App = (): JSX.Element => (
-  <Home />
+  <Suspense fallback="Loading...">
+    <Home />
+  </Suspense>
 );
 
 export default App;
