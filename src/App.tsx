@@ -1,13 +1,9 @@
 import React from 'react';
 
-const App = (): JSX.Element => {
-    console.log('hello world');
+import Home from './pages/Home';
 
-    return (
-        <div>
-            Hello World
-        </div>
-    );
-}
+const App = (): JSX.Element => (
+    <Home />
+);
 
 export default App;

@@ -1,11 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
-//
-// ────────────────────────────────────────────────── I ──────────
-//   :::::: R U L E S : :  :   :    :     :        :          :
-// ────────────────────────────────────────────────────────────
-//
+/**
+ * Rules
+ */
 
 const processTypescript = {
     test: /\.tsx?$/,
@@ -13,16 +12,42 @@ const processTypescript = {
     exclude: /node_modules/
 };
 
-//
-// ────────────────────────────────────────────────────── I ──────────
-//   :::::: P L U G I N S : :  :   :    :     :        :          :
-// ────────────────────────────────────────────────────────────────
-//
+const processScss = {
+    test: /\.scss$/i,
+    include: path.resolve(__dirname, '../src'),
+    use: [
+        MiniCssExtractPlugin.loader,
+        {
+            loader: 'css-loader',
+            options: {
+                modules: {
+                    exportLocalsConvention: 'camelCase',
+                    localIdentName: '[local]_[hash:base64:6]',
+                },
+            },
+        },
+        {
+            loader: 'sass-loader',
+        },
+    ],
+};
+
+/**
+ * Plugins
+ */
 
 const buildIndexHtml = new HtmlWebpackPlugin({
     template: path.resolve(__dirname, '../src/index.html'),
 });
 
+const miniCssExtract = new MiniCssExtractPlugin({
+    filename: '[name].[hash:8].css',
+    ignoreOrder: true,
+});
+
+/**
+ * Config
+ */
 
 module.exports = {
     entry: path.resolve(__dirname, '../src/render.tsx'),
@@ -34,10 +59,12 @@ module.exports = {
     module: {
         rules: [
             processTypescript,
+            processScss,
         ]
     },
     plugins: [
         buildIndexHtml,
+        miniCssExtract,
     ],
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
