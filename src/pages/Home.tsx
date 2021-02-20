@@ -8,7 +8,7 @@ const Home = (): JSX.Element => {
   copyToClipboard();
 
   return (
-    <div className={styles.bg}>Home</div>
+    <div className={styles.greenBg}>Home</div>
   );
 };
 
