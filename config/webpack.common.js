@@ -29,6 +29,11 @@ module.exports = {
   module: {
     rules: [
       processTypescript,
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+      },
       processScss,
     ],
   },
@@ -39,16 +44,5 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
-  },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        react: {
-          name: 'react',
-          test: /[\\/]node_modules[\\/]((react|react-dom).*)[\\/]/,
-          chunks: 'all',
-        },
-      },
-    },
   },
 };

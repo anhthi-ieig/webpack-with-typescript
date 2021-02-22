@@ -2,6 +2,9 @@
     "extends": [
         "airbnb-typescript"
     ],
+    "env": {
+        "node": true
+    },
     "rules": {
         "@typescript-eslint/indent": "off",
         "import/no-extraneous-dependencies": "off",
@@ -9,6 +12,7 @@
         "indent": "off"
     },
     "parserOptions": {
-        "project": "./tsconfig.json"
+        "project": "./tsconfig.json",
+        "sourceType": "module"
     }
 }
