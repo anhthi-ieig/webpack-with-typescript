@@ -29,11 +29,6 @@ module.exports = {
   module: {
     rules: [
       processTypescript,
-      {
-        test: /\.js$/,
-        enforce: 'pre',
-        use: ['source-map-loader'],
-      },
       processScss,
     ],
   },
