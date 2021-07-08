@@ -1,3 +1,3 @@
 const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin');
 
-module.exports = new BundleStatsWebpackPlugin();
+module.exports = () => new BundleStatsWebpackPlugin();

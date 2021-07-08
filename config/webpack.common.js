@@ -4,16 +4,17 @@ const path = require('path');
  * Module Rules
  */
 
-const processTypescript = require('./rules/typescript');
-const processScss = require('./rules/scss');
+const processTs = require('./rules/process-ts');
+const processScss = require('./rules/process-scss');
 
 /**
  * Plugins
  */
 
-const stylelint = require('./plugins/stylelint-webpack-plugin');
-const extractCss = require('./plugins/mini-css-extract-plugin');
-const buildHtml = require('./plugins/html-webpack-plugin');
+const htmlWebpackPlugin = require('./plugins/html-webpack-plugin');
+const miniCssExtractPlugin = require('./plugins/mini-css-extract-plugin');
+const stylelintWebpackPlugin = require('./plugins/stylelint-webpack-plugin');
+const moduleLocalesWebpackPlugin = require('./plugins/moment-locales-webpack-plugin');
 
 /**
  * Config
@@ -28,14 +29,15 @@ module.exports = {
   },
   module: {
     rules: [
-      processTypescript,
-      processScss,
+      processTs(),
+      processScss(),
     ],
   },
   plugins: [
-    stylelint,
-    extractCss,
-    buildHtml,
+    htmlWebpackPlugin(),
+    miniCssExtractPlugin(),
+    stylelintWebpackPlugin(),
+    moduleLocalesWebpackPlugin(),
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],

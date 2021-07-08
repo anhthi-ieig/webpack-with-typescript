@@ -4,6 +4,6 @@ const path = require('path');
 
 const rootDir = fs.realpathSync(process.cwd());
 
-module.exports = new HtmlWebpackPlugin({
+module.exports = () => new HtmlWebpackPlugin({
   template: path.resolve(rootDir, 'src/index.html'),
 });

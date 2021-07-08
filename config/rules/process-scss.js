@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const rootDir = fs.realpathSync(process.cwd());
 
-module.exports = {
+module.exports = () => ({
   test: /\.scss$/i,
   include: path.resolve(rootDir, 'src'),
   use: [
@@ -30,4 +30,4 @@ module.exports = {
       },
     },
   ],
-};
+});
